@@ -1,45 +1,34 @@
 import React from "react";
+import ReactSignupLoginComponent from 'react-signup-login-component';
 
-class Connexion extends React.Component {
+const LoginPage = (props) => {
+    const signupWasClickedCallback = (data) => {
+        console.log(data);
 
-    logIn = event => {
-        event.preventDefault();
-        const pseudo = this.pseudoInput.value;
-        const password = this.pwdInput.value;
+        alert('Signup callback, see log on the console to see the data.');
+    };
+    const loginWasClickedCallback = (data) => {
+        console.log(data);
+        alert('Login callback, see log on the console to see the data.');
+    };
+    const recoverPasswordWasClickedCallback = (data) => {
+        console.log(data);
+        alert('Recover password callback, see log on the console to see the data.');
+    };
+    return (
+        <div>
+            <ReactSignupLoginComponent
+                title="Dofus SP"
+                goToSignupCustomLabel = "inscription"
+                goToLoginCustomLabel = "connexion"
+                submitLoginCustomLabel= "Confirmation"
+                submitSignupCustomLabel= "Confirmation"
+                handleSignup={signupWasClickedCallback}
+                handleLogin={loginWasClickedCallback}
+                handleRecoverPassword={recoverPasswordWasClickedCallback}
+            />
+        </div>
+    );
+};
 
-        if(pseudo === "azerty" && password === "abc"){
-            this.props.history.push('/home');
-        }
-        else {
-            alert("wrong password")
-        }
-    }
-
-
-
-
-
-    render(){
-        return(
-            <div className="connexionDiv">
-                <form className="connexionForm" onSubmit={e => this.logIn(e)}>
-                    <input
-                        type="text"
-                        required
-                        className="connexionPseudo"
-                        ref={input =>this.pseudoInput = input}
-                    />
-                    <input
-                        type="password"
-                        required
-                        className="connexionPwd"
-                        ref={input =>this.pwdInput = input}
-                    />
-                    <button type="submit" className="connexionBtn">Log In</button>
-                </form>
-            </div>
-        )
-    }
-}
-
-export default Connexion;
+export default LoginPage;
